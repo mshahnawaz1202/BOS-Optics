@@ -1,25 +1,40 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BOS Optics</title>
+
+    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
 </head>
 <body>
-    <header>
-        <div class="navigation">
-            <nav>
-                <a href="">Home</a>
-                <a href="">About</a>
-                <a href="">Products</a>
-                <a href="">Services</a>
-                <a href="">Contact</a>
-                <a href="">Login</a>
-                <a href="">Register</a>
-                <a href="">Cart</a>
-                <a href="">Logout</a>
-            </nav>
-        </div>
-    </header>
+
+<header>
+
+    <div class="logo-container">
+        <img class="logo" src="{% static 'core/images/logo_pic.png' %}" alt="BOS Optics">
+    </div>
+
+    <nav class="navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a href="#">Login</a>
+        <a href="#">Register</a>
+        <a href="#">Cart</a>
+        <a href="#">Logout</a>
+    </nav>
+
+</header>
+
+<section id="home">
+    <h1>Welcome to BOS Optics</h1>
+</section>
+
+<script src="{% static 'core/js/home.js' %}"></script>
+
 </body>
 </html>
