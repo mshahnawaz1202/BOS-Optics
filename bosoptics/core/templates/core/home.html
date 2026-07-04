@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<!-- ================= HEADER ================= -->
 <header>
 
     <div class="logo-container">
@@ -18,22 +19,294 @@
 
     <nav class="navigation">
         <a href="#home">Home</a>
-        <a href="#about">About</a>
+        <a href="#categories">Categories</a>
         <a href="#products">Products</a>
+        <a href="#about">About</a>
         <a href="#services">Services</a>
         <a href="#contact">Contact</a>
         <a href="#">Login</a>
         <a href="#">Register</a>
         <a href="#">Cart</a>
-        <a href="#">Logout</a>
     </nav>
 
 </header>
 
-<section id="home">
-    <h1>Welcome to BOS Optics</h1>
+<!-- ================= HERO ================= -->
+<section id="home" class="hero">
+
+    <div class="hero-content">
+
+        <h1>See Better. Look Better.</h1>
+
+        <p>
+            Discover premium eyewear, stylish sunglasses, and prescription
+            glasses designed for comfort, fashion, and crystal-clear vision.
+        </p>
+
+        <div class="hero-buttons">
+            <button>Shop Now</button>
+            <button>Explore Collection</button>
+        </div>
+
+    </div>
+
+    <div class="hero-image">
+        <img src="{% static 'core/images/hero_pic.jpg' %}" alt="Hero Image">
+    </div>
+
 </section>
 
+<!-- ================= CATEGORIES ================= -->
+<section id="categories">
+
+    <h2>Shop by Category</h2>
+
+    <div class="category-container">
+
+        <div class="category-card">
+            <img src="{% static 'core/images/categories/men.png' %}" alt="">
+            <h3>Men</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="{% static 'core/images/categories/women.png' %}" alt="">
+            <h3>Women</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="{% static 'core/images/categories/kids.png' %}" alt="">
+            <h3>Kids</h3>
+        </div>
+
+        <div class="category-card">
+            <img src="{% static 'core/images/categories/sunglasses.png' %}" alt="">
+            <h3>Sunglasses</h3>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= FEATURED PRODUCTS ================= -->
+<section id="products">
+
+    <h2>Featured Products</h2>
+
+    <div class="product-grid">
+
+        <div class="product-card">
+            <img src="{% static 'core/images/products/product1.png' %}" alt="">
+            <h3>Classic Black Frame</h3>
+            <p>$99</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'core/images/products/product2.png' %}" alt="">
+            <h3>Premium Round Glasses</h3>
+            <p>$120</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'core/images/products/product3.png' %}" alt="">
+            <h3>Blue Light Glasses</h3>
+            <p>$79</p>
+            <button>Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+            <img src="{% static 'core/images/products/product4.png' %}" alt="">
+            <h3>Luxury Sunglasses</h3>
+            <p>$149</p>
+            <button>Add to Cart</button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+<section id="services">
+
+    <h2>Why Choose BOS Optics?</h2>
+
+    <div class="features">
+
+        <div class="feature-box">
+            <h3>Premium Quality</h3>
+            <p>High-quality frames and lenses built to last.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>Free Shipping</h3>
+            <p>Free nationwide delivery on selected orders.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>Easy Returns</h3>
+            <p>Simple 30-day return and exchange policy.</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>Expert Support</h3>
+            <p>Professional guidance to help you choose the perfect eyewear.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+
+    <h2>About BOS Optics</h2>
+
+    <p>
+        BOS Optics is committed to providing premium eyewear that combines
+        modern fashion with exceptional vision care. We believe everyone
+        deserves stylish frames, comfortable lenses, and outstanding service.
+    </p>
+
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials">
+
+    <h2>What Our Customers Say</h2>
+
+    <div class="testimonial-container">
+
+        <div class="testimonial-card">
+            ⭐⭐⭐⭐⭐
+            <p>"Excellent quality and fast delivery!"</p>
+            <h4>- Ali Khan</h4>
+        </div>
+
+        <div class="testimonial-card">
+            ⭐⭐⭐⭐⭐
+            <p>"Stylish frames at affordable prices."</p>
+            <h4>- Sarah Ahmed</h4>
+        </div>
+
+        <div class="testimonial-card">
+            ⭐⭐⭐⭐⭐
+            <p>"Highly recommended for prescription glasses."</p>
+            <h4>- Hassan</h4>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= NEWSLETTER ================= -->
+<section id="newsletter">
+
+    <h2>Subscribe to Our Newsletter</h2>
+
+    <p>Get updates on new arrivals, discounts, and exclusive offers.</p>
+
+    <form>
+        <input type="email" placeholder="Enter your email">
+        <button>Subscribe</button>
+    </form>
+
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+
+    <h2>Contact Us</h2>
+
+    <p>Email: support@bosoptics.com</p>
+
+    <p>Phone: +92-300-1234567</p>
+
+    <p>Address: Islamabad, Pakistan</p>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+<<footer>
+
+    <div class="footer-container">
+
+        <!-- Company -->
+        <div class="footer-section">
+
+            <img class="footer-logo"
+                src="{% static 'core/images/logo_pic.png' %}"
+                alt="BOS Optics">
+
+            <p>
+                Premium eyewear designed for comfort, style,
+                and crystal-clear vision.
+            </p>
+
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+
+            <h3>Quick Links</h3>
+
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+
+        <!-- Customer Support -->
+        <div class="footer-section">
+
+            <h3>Support</h3>
+
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Refund Policy</a>
+            <a href="#">Shipping Policy</a>
+            <a href="#">FAQs</a>
+
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-section">
+
+            <h3>Contact Us</h3>
+
+            <p>📍 Islamabad, Pakistan</p>
+            <p>📞 +92 300 1234567</p>
+            <p>✉ support@bosoptics.com</p>
+
+            <div class="social">
+
+                <a href="https://github.com/mshahnawaz1202" target="_blank">
+                    <img src="{% static 'core/images/social/github.svg' %}" alt="GitHub">
+                </a>
+
+                <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank">
+                    <img src="{% static 'core/images/social/instagram.svg' %}" alt="Instagram">
+                </a>
+
+                <a href="https://www.linkedin.com/in/muhammad-shah-nawaz-se" target="_blank">
+                    <img src="{% static 'core/images/social/linkedin.svg' %}" alt="LinkedIn">
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="copyright">
+        <p>© 2026 BOS Optics. All Rights Reserved.</p>
+    </div>
+
+</footer>
 <script src="{% static 'core/js/home.js' %}"></script>
 
 </body>
