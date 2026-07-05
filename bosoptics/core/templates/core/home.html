@@ -1,362 +1,177 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BOS Optics — Premium Eyewear & Eye Care</title>
-    <link rel="stylesheet" href="{% static 'core/css/home.css' %}">
-</head>
-<body>
 
-<!-- ================= TOP BAR ================= -->
-<div class="top-bar">
-    <div class="top-bar-inner">
-        <div class="top-bar-left">
-            <span>📞 +92 300 1234567</span>
-            <span>✉ support@bosoptics.com</span>
-        </div>
-        <div class="top-bar-right">
-            <span>🕐 Mon–Sat: 10:00 AM – 8:00 PM</span>
-            <span>📍 Chiniot, Pakistan</span>
-        </div>
-    </div>
-</div>
+{% block title %}Home{% endblock %}
 
-<!-- ================= HEADER ================= -->
-<header>
-    <div class="header-inner">
-        <a href="#home" class="logo-link">
-            <img class="logo" src="{% static 'core/images/logo.png' %}" alt="BOS Optics">
-        </a>
+{% block content %}
 
-        <button class="mobile-menu-btn" aria-label="Toggle menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <nav class="navigation">
-            <a href="#home">Home</a>
-            <a href="#categories">Categories</a>
-            <a href="#products">Products</a>
-            <a href="#why-us">Why Us</a>
-            <a href="#services">Services</a>
-            <a href="#brands">Brands</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-            <a href="#" class="nav-cart">🛒 Cart</a>
-        </nav>
-
-        <div class="header-actions">
-            <a href="#" class="btn-outline-sm">Login</a>
-            <a href="#" class="btn-primary-sm">Register</a>
-        </div>
-    </div>
-</header>
-
-{% if messages %}
-<div class="messages-container">
-    {% for message in messages %}
-    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
-    {% endfor %}
-</div>
-{% endif %}
-
-<!-- ================= HERO ================= -->
+<!-- HERO -->
 <section id="home" class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-inner">
-        <div class="hero-content">
-            <span class="hero-badge">Premium Eyewear Collection 2026</span>
-            <h1>See Better.<br>Look Better.</h1>
-            <p>
-                Discover premium eyewear, stylish sunglasses, and prescription
-                glasses designed for comfort, fashion, and crystal-clear vision.
-            </p>
+    <div class="hero-orb hero-orb-1" aria-hidden="true"></div>
+    <div class="hero-orb hero-orb-2" aria-hidden="true"></div>
+    <div class="hero-inner container">
+        <div class="hero-content reveal">
+            <span class="hero-badge"><span class="badge-dot"></span> Premium Collection 2026</span>
+            <h1>See Better.<br><em>Look Better.</em></h1>
+            <p>Discover premium eyewear, stylish sunglasses, and prescription glasses designed for comfort, fashion, and crystal-clear vision.</p>
             <div class="hero-buttons">
-                <a href="#products" class="btn-primary">Shop Now</a>
-                <a href="#categories" class="btn-outline">Explore Collection</a>
+                <a href="{% url 'products:list' %}" class="btn-gold">Shop Collection</a>
+                <a href="{% url 'services:book' %}" class="btn-outline">Book Eye Exam</a>
             </div>
             <div class="hero-stats-row">
                 <div><strong>5000+</strong><span>Happy Customers</span></div>
+                <div class="divider-v"></div>
                 <div><strong>200+</strong><span>Premium Frames</span></div>
+                <div class="divider-v"></div>
                 <div><strong>15+</strong><span>Expert Opticians</span></div>
             </div>
         </div>
-        <div class="hero-image">
+        <div class="hero-image reveal reveal-delay-2">
             <div class="hero-image-frame">
                 <img src="{% static 'core/images/giorgio-trovato-K62u25Jk6vo-unsplash.jpg' %}" alt="Featured Eyewear">
+                <div class="hero-float-card">
+                    <span class="float-icon">✦</span>
+                    <div><strong>Certified Lenses</strong><span>UV &amp; Blue-Light Protection</span></div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ================= FEATURED CATEGORIES ================= -->
-<section id="categories" class="section-categories">
-    <div class="section-header">
+<!-- CATEGORIES -->
+<section id="categories" class="section-pad">
+    <div class="section-header reveal">
         <span class="section-tag">Browse</span>
         <h2>Shop by Category</h2>
         <p>Find the perfect frames for every style and occasion</p>
     </div>
     <div class="category-container">
         {% for category in categories %}
-        <a href="#" class="category-card">
+        <a href="{% url 'products:list' %}?category={{ category.slug }}" class="category-card reveal">
             <div class="category-img-wrap">
                 <img src="{{ category.get_image_url }}" alt="{{ category.name }}">
+                <div class="category-overlay"></div>
             </div>
-            <h3>{{ category.name }}</h3>
-            <span class="category-link">Shop Now →</span>
+            <div class="category-body">
+                <h3>{{ category.name }}</h3>
+                <span class="category-link">Explore <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+            </div>
         </a>
         {% empty %}
-        <a href="#" class="category-card">
-            <div class="category-img-wrap">
-                <img src="{% static 'core/images/angus-gray-bSjqyqukCjY-unsplash.jpg' %}" alt="Men">
-            </div>
-            <h3>Men</h3>
-            <span class="category-link">Shop Now →</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="category-img-wrap">
-                <img src="{% static 'core/images/tamara-bellis-tw5_DJQaeDU-unsplash.jpg' %}" alt="Women">
-            </div>
-            <h3>Women</h3>
-            <span class="category-link">Shop Now →</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="category-img-wrap">
-                <img src="{% static 'core/images/irene-kredenets-LaXCHG-yCJg-unsplash.jpg' %}" alt="Kids">
-            </div>
-            <h3>Kids</h3>
-            <span class="category-link">Shop Now →</span>
-        </a>
-        <a href="#" class="category-card">
-            <div class="category-img-wrap">
-                <img src="{% static 'core/images/claudio-schwarz-e8TtkC5xyv4-unsplash.jpg' %}" alt="Sunglasses">
-            </div>
-            <h3>Sunglasses</h3>
-            <span class="category-link">Shop Now →</span>
-        </a>
+        <a href="{% url 'products:list' %}" class="category-card reveal"><div class="category-img-wrap"><img src="{% static 'core/images/angus-gray-bSjqyqukCjY-unsplash.jpg' %}" alt="Men"></div><div class="category-body"><h3>Men</h3><span class="category-link">Explore →</span></div></a>
         {% endfor %}
     </div>
 </section>
 
-<!-- ================= PRODUCTS (TABS) ================= -->
-<section id="products" class="section-products">
-    <div class="section-header">
+<!-- PRODUCTS TABS -->
+<section id="products" class="section-pad section-alt">
+    <div class="section-header reveal">
         <span class="section-tag">Collections</span>
         <h2>Our Best Picks</h2>
         <p>New arrivals, featured favorites, and best-selling frames</p>
     </div>
-
-    <div class="product-tabs">
-        <button class="tab-btn active" data-tab="new-arrivals">New Arrivals</button>
-        <button class="tab-btn" data-tab="featured">Featured</button>
-        <button class="tab-btn" data-tab="best-sellers">Best Sellers</button>
+    <div class="product-tabs reveal">
+        <button class="tab-btn active" data-tab="new-arrivals" type="button">New Arrivals</button>
+        <button class="tab-btn" data-tab="featured" type="button">Featured</button>
+        <button class="tab-btn" data-tab="best-sellers" type="button">Best Sellers</button>
     </div>
-
     <div id="new-arrivals" class="product-grid product-grid-tab active">
-        {% for product in new_arrivals %}
-        <div class="product-card">
-            {% if product.is_new_arrival %}<span class="product-badge">New</span>{% endif %}
-            <div class="product-img-wrap">
-                <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
-            </div>
-            <h3>{{ product.name }}</h3>
-            <div class="product-rating">★ {{ product.rating }}</div>
-            <div class="product-price">
-                <span class="price">Rs. {{ product.price }}</span>
-                {% if product.old_price %}<span class="old-price">Rs. {{ product.old_price }}</span>{% endif %}
-            </div>
-            <button class="btn-add-cart">Add to Cart</button>
-        </div>
-        {% empty %}
-        <div class="product-card">
-            <span class="product-badge">New</span>
-            <div class="product-img-wrap">
-                <img src="{% static 'core/images/giorgio-trovato-K62u25Jk6vo-unsplash.jpg' %}" alt="Classic Black Frame">
-            </div>
-            <h3>Classic Black Frame</h3>
-            <div class="product-rating">★ 5.0</div>
-            <div class="product-price"><span class="price">Rs. 99</span></div>
-            <button class="btn-add-cart">Add to Cart</button>
-        </div>
-        {% endfor %}
+        {% for product in new_arrivals %}{% include 'partials/product_card.html' %}{% empty %}
+        <p class="empty-msg">No new arrivals yet. Check back soon!</p>{% endfor %}
     </div>
-
     <div id="featured" class="product-grid product-grid-tab" style="display:none;">
-        {% for product in featured_products %}
-        <div class="product-card">
-            <div class="product-img-wrap">
-                <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
-            </div>
-            <h3>{{ product.name }}</h3>
-            <div class="product-rating">★ {{ product.rating }}</div>
-            <div class="product-price">
-                <span class="price">Rs. {{ product.price }}</span>
-                {% if product.old_price %}<span class="old-price">Rs. {{ product.old_price }}</span>{% endif %}
-            </div>
-            <button class="btn-add-cart">Add to Cart</button>
-        </div>
-        {% empty %}
-        <div class="product-card">
-            <div class="product-img-wrap">
-                <img src="{% static 'core/images/puneeth-shetty-bEiD43gc_lI-unsplash.jpg' %}" alt="Premium Round Glasses">
-            </div>
-            <h3>Premium Round Glasses</h3>
-            <div class="product-rating">★ 5.0</div>
-            <div class="product-price"><span class="price">Rs. 120</span></div>
-            <button class="btn-add-cart">Add to Cart</button>
-        </div>
-        {% endfor %}
+        {% for product in featured_products %}{% include 'partials/product_card.html' %}{% empty %}
+        <p class="empty-msg">No featured products yet.</p>{% endfor %}
     </div>
-
     <div id="best-sellers" class="product-grid product-grid-tab" style="display:none;">
-        {% for product in best_sellers %}
-        <div class="product-card">
-            <span class="product-badge bestseller">Best Seller</span>
-            <div class="product-img-wrap">
-                <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
-            </div>
-            <h3>{{ product.name }}</h3>
-            <div class="product-rating">★ {{ product.rating }}</div>
-            <div class="product-price">
-                <span class="price">Rs. {{ product.price }}</span>
-                {% if product.old_price %}<span class="old-price">Rs. {{ product.old_price }}</span>{% endif %}
-            </div>
-            <button class="btn-add-cart">Add to Cart</button>
-        </div>
-        {% empty %}
-        <div class="product-card">
-            <span class="product-badge bestseller">Best Seller</span>
-            <div class="product-img-wrap">
-                <img src="{% static 'core/images/claudio-schwarz-e8TtkC5xyv4-unsplash.jpg' %}" alt="Luxury Sunglasses">
-            </div>
-            <h3>Luxury Sunglasses</h3>
-            <div class="product-rating">★ 5.0</div>
-            <div class="product-price"><span class="price">Rs. 149</span></div>
-            <button class="btn-add-cart">Add to Cart</button>
-        </div>
-        {% endfor %}
+        {% for product in best_sellers %}{% include 'partials/product_card.html' %}{% empty %}
+        <p class="empty-msg">No best sellers yet.</p>{% endfor %}
+    </div>
+    <div class="section-cta-inline reveal">
+        <a href="{% url 'products:list' %}" class="btn-outline">View All Products</a>
     </div>
 </section>
 
-<!-- ================= WHY CHOOSE BOS OPTICS ================= -->
-<section id="why-us" class="section-why">
-    <div class="section-header">
-        <span class="section-tag">Our Promise</span>
-        <h2>Why Choose BOS Optics?</h2>
-        <p>Quality, expertise, and care in every pair</p>
-    </div>
-    <div class="features">
-        <div class="feature-box">
-            <div class="feature-icon">💎</div>
-            <h3>Premium Quality</h3>
-            <p>High-quality frames and certified lenses built to last for years.</p>
+<!-- WHY US -->
+<section id="why-us" class="section-pad">
+    <div class="why-grid container-wide">
+        <div class="why-image reveal">
+            <img src="{% static 'core/images/quality-img.jpg' %}" alt="Premium Quality">
+            <div class="why-badge">Since 2020</div>
         </div>
-        <div class="feature-box">
-            <div class="feature-icon">🔬</div>
-            <h3>Certified Lenses</h3>
-            <p>UV protection, anti-glare, and blue-light filtering options available.</p>
-        </div>
-        <div class="feature-box">
-            <div class="feature-icon">👁️</div>
-            <h3>Expert Eye Care</h3>
-            <p>Certified optometrists providing professional vision assessments.</p>
-        </div>
-        <div class="feature-box">
-            <div class="feature-icon">🚚</div>
-            <h3>Free Shipping</h3>
-            <p>Free nationwide delivery on orders above Rs. 5,000.</p>
+        <div class="why-content reveal reveal-delay-1">
+            <span class="section-tag">Our Promise</span>
+            <h2>Why Choose BOS Optics?</h2>
+            <p class="lead">We blend world-class craftsmanship with personalized eye care — because great vision deserves great style.</p>
+            <div class="features-list">
+                <div class="feature-item"><div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div><div><h4>Premium Quality</h4><p>High-quality frames and certified lenses built to last.</p></div></div>
+                <div class="feature-item"><div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div><div><h4>Certified Lenses</h4><p>UV protection, anti-glare, and blue-light filtering.</p></div></div>
+                <div class="feature-item"><div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div><div><h4>Expert Eye Care</h4><p>Certified optometrists for professional assessments.</p></div></div>
+                <div class="feature-item"><div class="feature-icon-wrap"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><div><h4>Free Shipping</h4><p>Nationwide delivery on orders above Rs. 5,000.</p></div></div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ================= SERVICES ================= -->
-<section id="services" class="section-services">
-    <div class="section-header">
+<!-- SERVICES -->
+<section id="services" class="section-pad section-alt">
+    <div class="section-header reveal">
         <span class="section-tag">What We Offer</span>
         <h2>Our Services</h2>
         <p>Complete eye care solutions under one roof</p>
     </div>
     <div class="services-grid">
         {% for service in services %}
-        <div class="service-card">
-            <div class="service-icon service-icon-{{ service.icon }}">
-                {% if service.icon == 'eye' %}👁️
-                {% elif service.icon == 'frame' %}🕶️
-                {% elif service.icon == 'lens' %}🔍
-                {% else %}🏢{% endif %}
+        <div class="service-card reveal">
+            <div class="service-icon-ring">
+                {% if service.icon == 'eye' %}👁️{% elif service.icon == 'frame' %}🕶️{% elif service.icon == 'lens' %}🔍{% else %}🏢{% endif %}
             </div>
             <h3>{{ service.title }}</h3>
             <p>{{ service.description }}</p>
             <div class="service-meta">
-                {% if service.duration %}<span>⏱ {{ service.duration }}</span>{% endif %}
-                {% if service.price %}<span>From Rs. {{ service.price }}</span>{% endif %}
+                {% if service.duration %}<span>{{ service.duration }}</span>{% endif %}
+                {% if service.price %}<span>From Rs. {{ service.price|floatformat:0 }}</span>{% endif %}
             </div>
-            <a href="#contact" class="service-link">Book Now →</a>
-        </div>
-        {% empty %}
-        <div class="service-card">
-            <div class="service-icon">👁️</div>
-            <h3>Eye Examination</h3>
-            <p>Comprehensive vision testing by certified optometrists.</p>
-            <div class="service-meta"><span>⏱ 30 mins</span><span>From Rs. 1500</span></div>
-            <a href="#contact" class="service-link">Book Now →</a>
-        </div>
-        <div class="service-card">
-            <div class="service-icon">🕶️</div>
-            <h3>Frame Fitting</h3>
-            <p>Personalized fitting for comfort, style, and perfect alignment.</p>
-            <div class="service-meta"><span>⏱ 20 mins</span><span>From Rs. 500</span></div>
-            <a href="#contact" class="service-link">Book Now →</a>
-        </div>
-        <div class="service-card">
-            <div class="service-icon">🔍</div>
-            <h3>Lens Customization</h3>
-            <p>Anti-glare, blue-light, progressive, and photochromic options.</p>
-            <div class="service-meta"><span>⏱ 45 mins</span><span>From Rs. 2500</span></div>
-            <a href="#contact" class="service-link">Book Now →</a>
+            <a href="{% url 'services:book' %}" class="service-link">Book Now →</a>
         </div>
         {% endfor %}
     </div>
 </section>
 
-<!-- ================= SHOP BY BRAND ================= -->
+<!-- BRANDS MARQUEE -->
 <section id="brands" class="section-brands">
-    <div class="section-header">
+    <div class="section-header reveal container">
         <span class="section-tag">Partners</span>
         <h2>Shop by Brand</h2>
-        <p>World-renowned eyewear brands you trust</p>
     </div>
-    <div class="brands-grid">
-        {% for brand in brands %}
-        <a href="#" class="brand-card">
-            <img src="{{ brand.get_logo_url }}" alt="{{ brand.name }}">
-            <span>{{ brand.name }}</span>
-        </a>
-        {% empty %}
-        <a href="#" class="brand-card"><img src="{% static 'core/images/g-1.png' %}" alt="Ray-Ban"><span>Ray-Ban</span></a>
-        <a href="#" class="brand-card"><img src="{% static 'core/images/g-2.png' %}" alt="Oakley"><span>Oakley</span></a>
-        <a href="#" class="brand-card"><img src="{% static 'core/images/g-3.png' %}" alt="Gucci"><span>Gucci</span></a>
-        <a href="#" class="brand-card"><img src="{% static 'core/images/g-4.png' %}" alt="Prada"><span>Prada</span></a>
-        <a href="#" class="brand-card"><img src="{% static 'core/images/g-5.png' %}" alt="Versace"><span>Versace</span></a>
-        <a href="#" class="brand-card"><img src="{% static 'core/images/g-6.png' %}" alt="Tom Ford"><span>Tom Ford</span></a>
-        <a href="#" class="brand-card"><img src="{% static 'core/images/g-7.png' %}" alt="Persol"><span>Persol</span></a>
-        <a href="#" class="brand-card"><img src="{% static 'core/images/g-8.png' %}" alt="Dior"><span>Dior</span></a>
-        {% endfor %}
+    <div class="brand-marquee">
+        <div class="brand-track">
+            {% for brand in brands %}
+            <a href="{% url 'products:list' %}" class="brand-pill"><img src="{{ brand.get_logo_url }}" alt="{{ brand.name }}"><span>{{ brand.name }}</span></a>
+            {% empty %}
+            <a href="{% url 'products:list' %}" class="brand-pill"><img src="{% static 'core/images/g-1.png' %}" alt=""><span>Ray-Ban</span></a>
+            <a href="{% url 'products:list' %}" class="brand-pill"><img src="{% static 'core/images/g-2.png' %}" alt=""><span>Oakley</span></a>
+            <a href="{% url 'products:list' %}" class="brand-pill"><img src="{% static 'core/images/g-3.png' %}" alt=""><span>Gucci</span></a>
+            <a href="{% url 'products:list' %}" class="brand-pill"><img src="{% static 'core/images/g-4.png' %}" alt=""><span>Prada</span></a>
+            <a href="{% url 'products:list' %}" class="brand-pill"><img src="{% static 'core/images/g-5.png' %}" alt=""><span>Versace</span></a>
+            <a href="{% url 'products:list' %}" class="brand-pill"><img src="{% static 'core/images/g-6.png' %}" alt=""><span>Tom Ford</span></a>
+            {% endfor %}
+            {% for brand in brands %}
+            <a href="{% url 'products:list' %}" class="brand-pill" aria-hidden="true"><img src="{{ brand.get_logo_url }}" alt=""><span>{{ brand.name }}</span></a>
+            {% endfor %}
+        </div>
     </div>
 </section>
 
-<!-- ================= PROMOTIONAL BANNER ================= -->
-<section class="section-promo">
-    <div class="promo-banner">
+<!-- PROMO -->
+<section class="section-pad">
+    <div class="promo-banner reveal container-wide">
         <div class="promo-content">
-            <span class="promo-tag">Limited Time Offer</span>
-            <h2>Get 30% Off on Your First Pair</h2>
-            <p>Use code <strong>BOSOPTICS30</strong> at checkout. Valid on all prescription frames.</p>
+            <span class="promo-tag">Limited Time</span>
+            <h2>30% Off Your First Pair</h2>
+            <p>Use code <strong class="promo-code">BOSOPTICS30</strong> at checkout.</p>
             <div id="promo-countdown" class="countdown"></div>
-            <a href="#products" class="btn-primary">Shop the Sale</a>
+            <a href="{% url 'products:list' %}" class="btn-gold">Shop the Sale</a>
         </div>
         <div class="promo-image">
             <img src="{% static 'core/images/offer-img.jpg' %}" alt="Special Offer">
@@ -364,305 +179,143 @@
     </div>
 </section>
 
-<!-- ================= TESTIMONIALS ================= -->
-<section id="testimonials" class="section-testimonials">
-    <div class="section-header">
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="section-pad section-alt">
+    <div class="section-header reveal">
         <span class="section-tag">Reviews</span>
         <h2>What Our Customers Say</h2>
-        <p>Trusted by thousands across Pakistan</p>
     </div>
     <div class="testimonial-container">
         {% for t in testimonials %}
-        <div class="testimonial-card">
-            <img class="quote-icon" src="{% static 'core/images/quote.png' %}" alt="">
+        <div class="testimonial-card reveal">
             <div class="stars">{% for i in "12345" %}{% if forloop.counter <= t.rating %}★{% else %}☆{% endif %}{% endfor %}</div>
             <p>"{{ t.comment }}"</p>
             <div class="testimonial-author">
                 <img src="{{ t.get_avatar_url }}" alt="{{ t.client_name }}">
-                <div>
-                    <h4>{{ t.client_name }}</h4>
-                    {% if t.client_title %}<span>{{ t.client_title }}</span>{% endif %}
-                </div>
-            </div>
-        </div>
-        {% empty %}
-        <div class="testimonial-card">
-            <div class="stars">★★★★★</div>
-            <p>"Excellent quality and fast delivery!"</p>
-            <div class="testimonial-author">
-                <img src="{% static 'core/images/client.png' %}" alt="Ali Khan">
-                <div><h4>Ali Khan</h4><span>Verified Buyer</span></div>
+                <div><h4>{{ t.client_name }}</h4>{% if t.client_title %}<span>{{ t.client_title }}</span>{% endif %}</div>
             </div>
         </div>
         {% endfor %}
     </div>
 </section>
 
-<!-- ================= STATISTICS ================= -->
+<!-- STATS -->
 <section class="section-stats">
-    <div class="stats-grid">
+    <div class="stats-grid container">
         {% for stat in statistics %}
-        <div class="stat-card">
-            <div class="stat-icon">
-                {% if stat.icon == 'users' %}👥
-                {% elif stat.icon == 'box' %}📦
-                {% elif stat.icon == 'award' %}🏆
-                {% else %}⭐{% endif %}
-            </div>
+        <div class="stat-card reveal">
             <div class="stat-number" data-target="{{ stat.count }}" data-suffix="{{ stat.suffix }}">0{{ stat.suffix }}</div>
             <div class="stat-title">{{ stat.title }}</div>
         </div>
-        {% empty %}
-        <div class="stat-card">
-            <div class="stat-icon">👥</div>
-            <div class="stat-number" data-target="5000" data-suffix="+">0+</div>
-            <div class="stat-title">Happy Customers</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-icon">📦</div>
-            <div class="stat-number" data-target="12000" data-suffix="+">0+</div>
-            <div class="stat-title">Products Sold</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-icon">🏆</div>
-            <div class="stat-number" data-target="15" data-suffix="+">0+</div>
-            <div class="stat-title">Expert Opticians</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-icon">⭐</div>
-            <div class="stat-number" data-target="98" data-suffix="%">0%</div>
-            <div class="stat-title">Satisfaction Rate</div>
-        </div>
         {% endfor %}
     </div>
 </section>
 
-<!-- ================= LATEST BLOG ================= -->
-<section id="blog" class="section-blog">
-    <div class="section-header">
+<!-- BLOG -->
+<section id="blog" class="section-pad">
+    <div class="section-header reveal">
         <span class="section-tag">Insights</span>
         <h2>Latest from Our Blog</h2>
-        <p>Eye-care tips, fashion trends, and vision health guides</p>
     </div>
     <div class="blog-grid">
         {% for post in blog_posts %}
-        <article class="blog-card">
-            <div class="blog-img-wrap">
+        <article class="blog-card reveal">
+            <a href="{% url 'blog:detail' post.slug %}" class="blog-img-wrap">
                 <img src="{{ post.get_image_url }}" alt="{{ post.title }}">
-            </div>
+            </a>
             <div class="blog-body">
                 <span class="blog-date">{{ post.created_at|date:"M d, Y" }}</span>
-                <h3>{{ post.title }}</h3>
+                <h3><a href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a></h3>
                 <p>{{ post.excerpt }}</p>
-                <a href="#" class="blog-link">Read More →</a>
-            </div>
-        </article>
-        {% empty %}
-        <article class="blog-card">
-            <div class="blog-img-wrap">
-                <img src="{% static 'core/images/quality-img.jpg' %}" alt="Blog">
-            </div>
-            <div class="blog-body">
-                <span class="blog-date">Jul 05, 2026</span>
-                <h3>5 Tips for Choosing the Perfect Eyewear</h3>
-                <p>Discover how to match frames to your face shape and lifestyle.</p>
-                <a href="#" class="blog-link">Read More →</a>
+                <a href="{% url 'blog:detail' post.slug %}" class="blog-link">Read More →</a>
             </div>
         </article>
         {% endfor %}
     </div>
+    <div class="section-cta-inline reveal"><a href="{% url 'blog:list' %}" class="btn-outline">View All Articles</a></div>
 </section>
 
-<!-- ================= NEWSLETTER ================= -->
+<!-- NEWSLETTER -->
 <section id="newsletter" class="section-newsletter">
-    <div class="newsletter-box">
+    <div class="newsletter-box container reveal">
         <div class="newsletter-text">
-            <h2>Subscribe to Our Newsletter</h2>
-            <p>Get updates on new arrivals, exclusive discounts, and eye-care tips.</p>
+            <span class="section-tag">Exclusive Access</span>
+            <h2>Join the BOS Optics Circle</h2>
+            <p>New arrivals, member-only discounts, and eye-care tips.</p>
         </div>
-        <form method="post" action="{% url 'home' %}" class="newsletter-form">
+        <form method="post" action="{% url 'core:newsletter' %}" class="newsletter-form">
             {% csrf_token %}
-            <input type="email" name="email" placeholder="Enter your email address" required>
-            <button type="submit" class="btn-primary">Subscribe</button>
+            <input type="hidden" name="next" value="{% url 'core:home' %}">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit" class="btn-gold">Subscribe</button>
         </form>
     </div>
 </section>
 
-<!-- ================= INSTAGRAM GALLERY ================= -->
-<section id="instagram" class="section-instagram">
-    <div class="section-header">
+<!-- INSTAGRAM -->
+<section id="instagram" class="section-pad section-alt">
+    <div class="section-header reveal">
         <span class="section-tag">@bosoptics</span>
-        <h2>Follow Us on Instagram</h2>
-        <p>Style inspiration and behind-the-scenes from our store</p>
+        <h2>Follow Our Style</h2>
     </div>
-    <div class="instagram-grid">
-        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item"><img src="{% static 'core/images/g-1.png' %}" alt="Instagram"><div class="instagram-overlay">📷</div></a>
-        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item"><img src="{% static 'core/images/g-2.png' %}" alt="Instagram"><div class="instagram-overlay">📷</div></a>
-        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item"><img src="{% static 'core/images/g-3.png' %}" alt="Instagram"><div class="instagram-overlay">📷</div></a>
-        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item"><img src="{% static 'core/images/g-4.png' %}" alt="Instagram"><div class="instagram-overlay">📷</div></a>
-        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item"><img src="{% static 'core/images/g-5.png' %}" alt="Instagram"><div class="instagram-overlay">📷</div></a>
-        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item"><img src="{% static 'core/images/g-6.png' %}" alt="Instagram"><div class="instagram-overlay">📷</div></a>
-        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item"><img src="{% static 'core/images/g-7.png' %}" alt="Instagram"><div class="instagram-overlay">📷</div></a>
-        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item"><img src="{% static 'core/images/g-8.png' %}" alt="Instagram"><div class="instagram-overlay">📷</div></a>
+    <div class="instagram-grid container">
+        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item reveal"><img src="{% static 'core/images/g-1.png' %}" alt=""><div class="instagram-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div></a>
+        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item reveal"><img src="{% static 'core/images/g-2.png' %}" alt=""><div class="instagram-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div></a>
+        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item reveal"><img src="{% static 'core/images/g-3.png' %}" alt=""><div class="instagram-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div></a>
+        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item reveal"><img src="{% static 'core/images/g-4.png' %}" alt=""><div class="instagram-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div></a>
+        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item reveal"><img src="{% static 'core/images/g-5.png' %}" alt=""><div class="instagram-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div></a>
+        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item reveal"><img src="{% static 'core/images/g-6.png' %}" alt=""><div class="instagram-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div></a>
+        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item reveal"><img src="{% static 'core/images/g-7.png' %}" alt=""><div class="instagram-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div></a>
+        <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener" class="instagram-item reveal"><img src="{% static 'core/images/g-8.png' %}" alt=""><div class="instagram-overlay"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div></a>
     </div>
 </section>
 
-<!-- ================= STORE LOCATION & CONTACT ================= -->
-<section id="contact" class="section-contact">
-    <div class="section-header">
+<!-- CONTACT -->
+<section id="contact" class="section-pad">
+    <div class="section-header reveal">
         <span class="section-tag">Visit Us</span>
-        <h2>Store Location & Contact</h2>
-        <p>We'd love to see you at our showroom</p>
+        <h2>Store Location &amp; Contact</h2>
     </div>
-    <div class="contact-grid">
+    <div class="contact-grid container-wide">
         <div class="contact-info">
-            <div class="contact-item">
-                <span class="contact-icon">📍</span>
-                <div>
-                    <h4>Address</h4>
-                    <p>Main Bazaar, Chiniot, Punjab, Pakistan</p>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">📞</span>
-                <div>
-                    <h4>Phone</h4>
-                    <p>+92 300 1234567</p>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">✉️</span>
-                <div>
-                    <h4>Email</h4>
-                    <p>support@bosoptics.com</p>
-                </div>
-            </div>
-            <div class="contact-item">
-                <span class="contact-icon">🕐</span>
-                <div>
-                    <h4>Business Hours</h4>
-                    <p>Mon – Sat: 10:00 AM – 8:00 PM<br>Sunday: 12:00 PM – 6:00 PM</p>
-                </div>
-            </div>
+            <div class="contact-item reveal"><span class="contact-icon">📍</span><div><h4>Address</h4><p>Main Bazaar, Chiniot, Punjab, Pakistan</p></div></div>
+            <div class="contact-item reveal"><span class="contact-icon">📞</span><div><h4>Phone</h4><p><a href="tel:+923001234567">+92 300 1234567</a></p></div></div>
+            <div class="contact-item reveal"><span class="contact-icon">✉️</span><div><h4>Email</h4><p><a href="mailto:support@bosoptics.com">support@bosoptics.com</a></p></div></div>
+            <div class="contact-item reveal"><span class="contact-icon">🕐</span><div><h4>Hours</h4><p>Mon–Sat: 10 AM – 8 PM<br>Sunday: 12 PM – 6 PM</p></div></div>
+            <a href="{% url 'services:book' %}" class="btn-gold" style="margin-top:12px;display:inline-block;">Book Appointment</a>
         </div>
-        <div class="contact-map">
-            <iframe
-                src="https://maps.google.com/maps?q=Chiniot,Pakistan&output=embed"
-                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade" title="BOS Optics Location">
-            </iframe>
+        <div class="contact-map reveal">
+            <iframe src="https://maps.google.com/maps?q=Chiniot,Pakistan&output=embed" loading="lazy" title="BOS Optics Location"></iframe>
         </div>
     </div>
 </section>
 
-<!-- ================= FAQ ================= -->
-<section id="faq" class="section-faq">
-    <div class="section-header">
+<!-- FAQ -->
+<section id="faq" class="section-pad section-alt">
+    <div class="section-header reveal">
         <span class="section-tag">Help</span>
         <h2>Frequently Asked Questions</h2>
-        <p>Quick answers to common questions</p>
     </div>
-    <div class="faq-container">
+    <div class="faq-container container-sm">
         {% for faq in faqs %}
-        <div class="faq-item">
-            <button class="faq-question">
-                {{ faq.question }}
-                <span class="faq-toggle">+</span>
-            </button>
-            <div class="faq-answer">
-                <p>{{ faq.answer }}</p>
-            </div>
-        </div>
-        {% empty %}
-        <div class="faq-item">
-            <button class="faq-question">How long does delivery take? <span class="faq-toggle">+</span></button>
-            <div class="faq-answer"><p>Standard delivery takes 3–5 business days nationwide.</p></div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question">Do you offer prescription lenses? <span class="faq-toggle">+</span></button>
-            <div class="faq-answer"><p>Yes. We offer single vision, bifocal, and progressive lenses.</p></div>
+        <div class="faq-item reveal">
+            <button class="faq-question" type="button">{{ faq.question }}<span class="faq-toggle">+</span></button>
+            <div class="faq-answer"><p>{{ faq.answer }}</p></div>
         </div>
         {% endfor %}
     </div>
 </section>
 
-<!-- ================= CTA ================= -->
+<!-- CTA -->
 <section class="section-cta">
-    <div class="cta-box">
+    <div class="cta-box container reveal">
         <h2>Ready to Find Your Perfect Pair?</h2>
         <p>Explore our collection or book a professional eye examination today.</p>
         <div class="cta-buttons">
-            <a href="#products" class="btn-primary">Explore Products</a>
-            <a href="#contact" class="btn-outline">Book Eye Exam</a>
+            <a href="{% url 'products:list' %}" class="btn-gold">Explore Products</a>
+            <a href="{% url 'services:book' %}" class="btn-outline">Book Eye Exam</a>
         </div>
     </div>
 </section>
 
-<!-- ================= FOOTER ================= -->
-<footer>
-    <div class="footer-container">
-        <div class="footer-section">
-            <img class="footer-logo" src="{% static 'core/images/logo.png' %}" alt="BOS Optics">
-            <p>Premium eyewear designed for comfort, style, and crystal-clear vision. Your trusted partner in eye care since 2020.</p>
-            <div class="social">
-                <a href="https://github.com/mshahnawaz1202" target="_blank" rel="noopener">
-                    <img src="{% static 'core/images/social/github.svg' %}" alt="GitHub">
-                </a>
-                <a href="https://www.instagram.com/m.shahnawaz_1202/" target="_blank" rel="noopener">
-                    <img src="{% static 'core/images/social/instagram.svg' %}" alt="Instagram">
-                </a>
-                <a href="https://www.linkedin.com/in/muhammad-shah-nawaz-se" target="_blank" rel="noopener">
-                    <img src="{% static 'core/images/social/linkedin.svg' %}" alt="LinkedIn">
-                </a>
-            </div>
-        </div>
-
-        <div class="footer-section">
-            <h3>Quick Links</h3>
-            <a href="#home">Home</a>
-            <a href="#categories">Categories</a>
-            <a href="#products">Products</a>
-            <a href="#services">Services</a>
-            <a href="#blog">Blog</a>
-            <a href="#contact">Contact</a>
-        </div>
-
-        <div class="footer-section">
-            <h3>Categories</h3>
-            <a href="#">Men's Eyewear</a>
-            <a href="#">Women's Eyewear</a>
-            <a href="#">Kids' Frames</a>
-            <a href="#">Sunglasses</a>
-            <a href="#">Prescription Glasses</a>
-        </div>
-
-        <div class="footer-section">
-            <h3>Customer Support</h3>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms &amp; Conditions</a>
-            <a href="#faq">FAQs</a>
-            <a href="#">Refund Policy</a>
-            <a href="#">Shipping Policy</a>
-        </div>
-
-        <div class="footer-section footer-newsletter">
-            <h3>Stay Updated</h3>
-            <p>Subscribe for exclusive offers and new arrivals.</p>
-            <form method="post" action="{% url 'home' %}" class="footer-newsletter-form">
-                {% csrf_token %}
-                <input type="email" name="email" placeholder="Your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
-            <p class="footer-contact">📍 Chiniot, Pakistan<br>📞 +92 300 1234567<br>✉ support@bosoptics.com</p>
-        </div>
-    </div>
-
-    <hr>
-    <div class="copyright">
-        <p>&copy; 2026 BOS Optics. All Rights Reserved.</p>
-    </div>
-</footer>
-
-<script src="{% static 'core/js/home.js' %}"></script>
-</body>
-</html>
+{% endblock %}
