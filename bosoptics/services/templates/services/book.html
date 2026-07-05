@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Appointment{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container reveal">
+        <span class="section-tag">Eye Care</span>
+        <h1>Book an Appointment</h1>
+        <p>Schedule your eye exam, frame fitting, or lens consultation</p>
+    </div>
+</section>
+
+<section class="section-pad">
+    <div class="container-wide book-grid">
+        <div class="book-info reveal">
+            <h2>Our Services</h2>
+            {% for service in services %}
+            <div class="book-service-item">
+                <h4>{{ service.title }}</h4>
+                <p>{{ service.description }}</p>
+                {% if service.price %}<span>From Rs. {{ service.price|floatformat:0 }}</span>{% endif %}
+                {% if service.duration %}<span>{{ service.duration }}</span>{% endif %}
+            </div>
+            {% endfor %}
+            <div class="contact-item" style="margin-top:24px;">
+                <span class="contact-icon">📞</span>
+                <div><h4>Prefer to call?</h4><p><a href="tel:+923001234567">+92 300 1234567</a></p></div>
+            </div>
+        </div>
+
+        <form method="post" class="book-form glass-card reveal reveal-delay-1">
+            {% csrf_token %}
+            <h3>Appointment Details</h3>
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Your full name">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required placeholder="you@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="+92 300 0000000">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="service">Service</label>
+                    <select id="service" name="service">
+                        <option value="">Select a service</option>
+                        {% for service in services %}
+                        <option value="{{ service.pk }}">{{ service.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date *</label>
+                    <input type="date" id="date" name="date" required min="{{ min_date }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message">Additional Notes</label>
+                <textarea id="message" name="message" rows="4" placeholder="Any special requirements..."></textarea>
+            </div>
+            <button type="submit" class="btn-gold btn-full">Confirm Booking</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

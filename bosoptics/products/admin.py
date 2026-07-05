@@ -1,5 +1,22 @@
 from django.contrib import admin
-from .models import Category, Brand, Product
+
+from .models import Category, Brand, Product, Order, OrderItem
+
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    extra = 0
+    readonly_fields = ('product', 'quantity', 'price')
+
+
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'full_name', 'email', 'total', 'status', 'created_at')
+    list_filter = ('status', 'created_at')
+    search_fields = ('full_name', 'email', 'phone')
+    inlines = [OrderItemInline]
+    readonly_fields = ('created_at',)
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

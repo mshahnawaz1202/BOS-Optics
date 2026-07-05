@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+<section class="page-hero page-hero-sm">
+    <div class="container reveal">
+        <span class="section-tag">Account</span>
+        <h1>Welcome, {{ user.first_name|default:user.username }}</h1>
+    </div>
+</section>
+
+<section class="section-pad">
+    <div class="container-wide profile-layout">
+        <div class="profile-card glass-card reveal">
+            <h3>Account Info</h3>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <a href="{% url 'core:logout' %}" class="btn-ghost-sm" style="margin-top:16px;display:inline-block;">Logout</a>
+        </div>
+
+        <div class="profile-section reveal">
+            <h2>My Orders</h2>
+            {% if orders %}
+            {% for order in orders %}
+            <div class="order-card glass-card">
+                <div class="order-card-header">
+                    <span>Order #{{ order.pk }}</span>
+                    <span class="status-badge">{{ order.get_status_display }}</span>
+                    <span>{{ order.created_at|date:"M d, Y" }}</span>
+                </div>
+                <div class="order-card-items">
+                    {% for item in order.items.all %}
+                    <span>{{ item.quantity }}× {{ item.product.name }}</span>
+                    {% endfor %}
+                </div>
+                <div class="order-card-total">Total: Rs. {{ order.total|floatformat:0 }}</div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-muted">No orders yet. <a href="{% url 'products:list' %}">Start shopping</a></p>
+            {% endif %}
+        </div>
+
+        <div class="profile-section reveal">
+            <h2>My Appointments</h2>
+            {% if appointments %}
+            {% for appt in appointments %}
+            <div class="order-card glass-card">
+                <div class="order-card-header">
+                    <span>{{ appt.service.title|default:"General Consultation" }}</span>
+                    <span>{{ appt.date|date:"M d, Y" }}</span>
+                </div>
+                <p>{{ appt.name }} · {{ appt.phone }}</p>
+            </div>
+            {% endfor %}
+            {% else %}
+            <p class="text-muted">No appointments. <a href="{% url 'services:book' %}">Book an eye exam</a></p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

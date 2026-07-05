@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}BOS Optics — Premium eyewear, sunglasses, prescription glasses and expert eye care in Chiniot, Pakistan.{% endblock %}">
+    <title>{% block title %}BOS Optics{% endblock %} — Premium Eyewear & Eye Care</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'core/css/main.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="page-loader" id="page-loader">
+        <div class="loader-inner">
+            <img src="{% static 'core/images/logo.png' %}" alt="BOS Optics" class="loader-logo">
+            <div class="loader-bar"><span></span></div>
+        </div>
+    </div>
+
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    {% include 'partials/topbar.html' %}
+    {% include 'partials/header.html' %}
+    {% include 'partials/messages.html' %}
+
+    <main>{% block content %}{% endblock %}</main>
+
+    {% include 'partials/footer.html' %}
+
+    <button class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </button>
+
+    <script src="{% static 'core/js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

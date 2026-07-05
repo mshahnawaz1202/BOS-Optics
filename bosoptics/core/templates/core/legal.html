@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <span class="section-tag">Legal</span>
+        <h1>{{ page_title }}</h1>
+    </div>
+</section>
+<section class="section-pad">
+    <div class="container-sm legal-content reveal">
+        <p>{{ content }}</p>
+        <a href="{% url 'core:home' %}" class="btn-outline" style="margin-top:32px;display:inline-block;">← Back to Home</a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+<div class="product-card reveal">
+    {% if product.is_new_arrival %}<span class="product-badge">New</span>{% endif %}
+    {% if product.is_best_seller and not product.is_new_arrival %}<span class="product-badge bestseller">Best Seller</span>{% endif %}
+    {% if product.is_featured and not product.is_new_arrival and not product.is_best_seller %}<span class="product-badge featured">Featured</span>{% endif %}
+
+    <a href="{% url 'products:detail' product.slug %}" class="product-img-wrap">
+        <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+        <div class="product-overlay">
+            <span class="overlay-btn">Quick View</span>
+        </div>
+    </a>
+
+    <div class="product-info">
+        {% if product.brand %}<span class="product-brand">{{ product.brand.name }}</span>{% endif %}
+        <h3><a href="{% url 'products:detail' product.slug %}">{{ product.name }}</a></h3>
+        <div class="product-rating">
+            {% for i in "12345" %}{% if forloop.counter <= product.rating %}<span class="star filled">★</span>{% else %}<span class="star">★</span>{% endif %}{% endfor %}
+            <span class="rating-num">{{ product.rating }}</span>
+        </div>
+        <div class="product-price">
+            <span class="price">Rs. {{ product.price|floatformat:0 }}</span>
+            {% if product.old_price %}<span class="old-price">Rs. {{ product.old_price|floatformat:0 }}</span>{% endif %}
+        </div>
+        <form method="post" action="{% url 'products:cart_add' product.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="btn-add-cart">Add to Cart</button>
+        </form>
+    </div>
+</div>

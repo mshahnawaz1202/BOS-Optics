@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<section class="page-hero page-hero-sm">
+    <div class="container reveal">
+        <span class="blog-date">{{ post.created_at|date:"F d, Y" }} · {{ post.author }}</span>
+        <h1>{{ post.title }}</h1>
+    </div>
+</section>
+
+<section class="section-pad">
+    <div class="container-sm">
+        <div class="blog-detail-image reveal">
+            <img src="{{ post.get_image_url }}" alt="{{ post.title }}">
+        </div>
+        <div class="blog-detail-content reveal">
+            <p class="lead">{{ post.excerpt }}</p>
+            <div class="article-body">{{ post.content|linebreaks }}</div>
+        </div>
+        <a href="{% url 'blog:list' %}" class="btn-outline" style="margin-top:40px;display:inline-block;">← All Articles</a>
+    </div>
+</section>
+
+{% if recent_posts %}
+<section class="section-pad section-alt">
+    <div class="container-wide">
+        <h2 style="text-align:center;margin-bottom:40px;">More Articles</h2>
+        <div class="blog-grid">
+            {% for p in recent_posts %}
+            <article class="blog-card reveal">
+                <a href="{% url 'blog:detail' p.slug %}" class="blog-img-wrap"><img src="{{ p.get_image_url }}" alt="{{ p.title }}"></a>
+                <div class="blog-body">
+                    <h3><a href="{% url 'blog:detail' p.slug %}">{{ p.title }}</a></h3>
+                    <a href="{% url 'blog:detail' p.slug %}" class="blog-link">Read More →</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

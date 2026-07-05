@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<section class="page-hero page-hero-sm">
+    <div class="container reveal">
+        <span class="section-tag">Your Bag</span>
+        <h1>Shopping Cart</h1>
+    </div>
+</section>
+
+<section class="section-pad">
+    <div class="container-wide">
+        {% if not cart.is_empty %}
+        <div class="cart-layout">
+            <div class="cart-items reveal">
+                {% for item in cart %}
+                <div class="cart-item">
+                    <a href="{% url 'products:detail' item.product.slug %}" class="cart-item-img">
+                        <img src="{{ item.product.get_image_url }}" alt="{{ item.product.name }}">
+                    </a>
+                    <div class="cart-item-info">
+                        <h3><a href="{% url 'products:detail' item.product.slug %}">{{ item.product.name }}</a></h3>
+                        {% if item.product.brand %}<span class="product-brand">{{ item.product.brand.name }}</span>{% endif %}
+                        <p class="cart-item-price">Rs. {{ item.product.price|floatformat:0 }}</p>
+                    </div>
+                    <form method="post" action="{% url 'products:cart_update' item.product.id %}" class="cart-qty-form">
+                        {% csrf_token %}
+                        <label class="sr-only" for="qty-{{ item.product.id }}">Quantity</label>
+                        <input type="number" id="qty-{{ item.product.id }}" name="quantity" value="{{ item.quantity }}" min="1" max="99">
+                        <button type="submit" class="btn-ghost-sm">Update</button>
+                    </form>
+                    <div class="cart-item-subtotal">
+                        <span>Rs. {{ item.subtotal|floatformat:0 }}</span>
+                    </div>
+                    <form method="post" action="{% url 'products:cart_remove' item.product.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="cart-remove" aria-label="Remove">&times;</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="cart-summary glass-card reveal">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Items ({{ cart_count }})</span>
+                    <span>Rs. {{ cart_total|floatformat:0 }}</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span class="text-gold">Free</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>Rs. {{ cart_total|floatformat:0 }}</span>
+                </div>
+                <a href="{% url 'products:checkout' %}" class="btn-gold btn-full">Proceed to Checkout</a>
+                <a href="{% url 'products:list' %}" class="btn-outline btn-full" style="margin-top:12px;text-align:center;">Continue Shopping</a>
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state reveal">
+            <h3>Your cart is empty</h3>
+            <p>Browse our collection and find your perfect pair.</p>
+            <a href="{% url 'products:list' %}" class="btn-gold">Shop Now</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

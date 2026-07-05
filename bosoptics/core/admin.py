@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import FAQ, Testimonial, NewsletterSubscription, Statistic
+from .models import FAQ, Testimonial, NewsletterSubscription, Statistic, ContactMessage
 
 @admin.register(FAQ)
 class FAQAdmin(admin.ModelAdmin):
@@ -16,3 +16,9 @@ class NewsletterSubscriptionAdmin(admin.ModelAdmin):
 @admin.register(Statistic)
 class StatisticAdmin(admin.ModelAdmin):
     list_display = ('title', 'count', 'suffix', 'order')
+
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('subject', 'name', 'email', 'created_at')
+    search_fields = ('name', 'email', 'subject')
+    readonly_fields = ('created_at',)

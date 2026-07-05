@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<section class="section-pad">
+    <div class="container-wide product-detail-grid reveal">
+        <div class="product-detail-image">
+            <img src="{{ product.get_image_url }}" alt="{{ product.name }}">
+        </div>
+        <div class="product-detail-info">
+            {% if product.brand %}<span class="product-brand">{{ product.brand.name }}</span>{% endif %}
+            <h1>{{ product.name }}</h1>
+            <div class="product-rating">
+                {% for i in "12345" %}{% if forloop.counter <= product.rating %}<span class="star filled">★</span>{% else %}<span class="star">★</span>{% endif %}{% endfor %}
+                <span class="rating-num">{{ product.rating }} / 5</span>
+            </div>
+            <div class="product-price detail-price">
+                <span class="price">Rs. {{ product.price|floatformat:0 }}</span>
+                {% if product.old_price %}<span class="old-price">Rs. {{ product.old_price|floatformat:0 }}</span>{% endif %}
+            </div>
+            <p class="product-description">{{ product.description }}</p>
+            <div class="detail-meta">
+                <span>Category: {{ product.category.name }}</span>
+            </div>
+            <div class="detail-actions">
+                <form method="post" action="{% url 'products:cart_add' product.id %}" class="add-cart-form">
+                    {% csrf_token %}
+                    <div class="qty-selector">
+                        <label for="qty">Qty</label>
+                        <input type="number" id="qty" name="quantity" value="1" min="1" max="99">
+                    </div>
+                    <button type="submit" class="btn-gold">Add to Cart</button>
+                </form>
+                <a href="{% url 'services:book' %}" class="btn-outline">Book Fitting</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% if related_products %}
+<section class="section-pad section-alt">
+    <div class="container-wide">
+        <div class="section-header reveal">
+            <h2>You May Also Like</h2>
+        </div>
+        <div class="product-grid">
+            {% for product in related_products %}
+            {% include 'partials/product_card.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}

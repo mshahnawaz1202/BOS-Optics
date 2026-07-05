@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container reveal">
+        <span class="section-tag">Insights</span>
+        <h1>Eye Care &amp; Style Blog</h1>
+        <p>Tips, trends, and vision health guides from BOS Optics</p>
+    </div>
+</section>
+
+<section class="section-pad">
+    <div class="container-wide">
+        <div class="blog-grid">
+            {% for post in posts %}
+            <article class="blog-card reveal">
+                <a href="{% url 'blog:detail' post.slug %}" class="blog-img-wrap">
+                    <img src="{{ post.get_image_url }}" alt="{{ post.title }}">
+                </a>
+                <div class="blog-body">
+                    <span class="blog-date">{{ post.created_at|date:"M d, Y" }} · {{ post.author }}</span>
+                    <h3><a href="{% url 'blog:detail' post.slug %}">{{ post.title }}</a></h3>
+                    <p>{{ post.excerpt }}</p>
+                    <a href="{% url 'blog:detail' post.slug %}" class="blog-link">Read More →</a>
+                </div>
+            </article>
+            {% empty %}
+            <div class="empty-state"><h3>No articles yet</h3><p>Check back soon for eye-care tips and trends.</p></div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

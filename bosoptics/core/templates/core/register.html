@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<section class="auth-page">
+    <div class="auth-split auth-split-reverse">
+        <div class="auth-form-side">
+            <div class="auth-form-wrap reveal">
+                <a href="{% url 'core:home' %}" class="auth-back">← Back to Home</a>
+                <span class="section-tag">Join Us</span>
+                <h1>Create Account</h1>
+                <p class="auth-subtitle">Become a BOS Optics member for exclusive perks</p>
+
+                <form method="post" class="auth-form" novalidate>
+                    {% csrf_token %}
+                    {% if form.non_field_errors %}
+                    <div class="form-errors">{{ form.non_field_errors }}</div>
+                    {% endif %}
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="{{ form.username.id_for_label }}">Username</label>
+                            {{ form.username }}
+                            {% if form.username.errors %}<span class="field-error">{{ form.username.errors.0 }}</span>{% endif %}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                            {{ form.first_name }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">Email</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}<span class="field-error">{{ form.email.errors.0 }}</span>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.password1.id_for_label }}">Password</label>
+                        {{ form.password1 }}
+                        {% if form.password1.errors %}<span class="field-error">{{ form.password1.errors.0 }}</span>{% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                        {{ form.password2 }}
+                        {% if form.password2.errors %}<span class="field-error">{{ form.password2.errors.0 }}</span>{% endif %}
+                    </div>
+                    <button type="submit" class="btn-gold btn-full">Create Account</button>
+                </form>
+
+                <p class="auth-switch">
+                    Already have an account?
+                    <a href="{% url 'core:login' %}">Sign in</a>
+                </p>
+            </div>
+        </div>
+        <div class="auth-visual">
+            <img src="{% static 'core/images/signup-image.jpg' %}" alt="Join BOS Optics">
+            <div class="auth-visual-overlay">
+                <h2>Join BOS Optics</h2>
+                <p>Create an account to shop premium eyewear, book eye exams, and unlock member discounts.</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Shop{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container reveal">
+        <span class="section-tag">Collection</span>
+        <h1>Shop Eyewear</h1>
+        <p>Premium frames, sunglasses, and prescription glasses</p>
+    </div>
+</section>
+
+<section class="section-pad section-alt">
+    <div class="container-wide">
+        <div class="shop-toolbar reveal">
+            <div class="category-filters">
+                <a href="{% url 'products:list' %}" class="filter-chip {% if not active_category %}active{% endif %}">All</a>
+                {% for cat in categories %}
+                <a href="{% url 'products:list' %}?category={{ cat.slug }}" class="filter-chip {% if active_category == cat.slug %}active{% endif %}">{{ cat.name }}</a>
+                {% endfor %}
+            </div>
+            <form class="shop-search" method="get" action="{% url 'products:list' %}">
+                {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
+                <input type="search" name="q" value="{{ search_query }}" placeholder="Search products...">
+                <button type="submit" class="btn-gold-sm">Search</button>
+            </form>
+        </div>
+
+        {% if products %}
+        <div class="product-grid" style="margin-top:40px;">
+            {% for product in products %}
+            {% include 'partials/product_card.html' %}
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state reveal">
+            <h3>No products found</h3>
+            <p>Try a different category or search term.</p>
+            <a href="{% url 'products:list' %}" class="btn-gold">View All Products</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
