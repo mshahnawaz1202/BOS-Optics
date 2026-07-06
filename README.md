@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-
-<div align="center">
-
----
-
-# 📖 Overview
-
-**BOS Optics** is a modern full-stack **Django** application developed for an optical store. It delivers a premium online shopping experience where users can browse products, search collections, manage their shopping cart, complete purchases, book eye-care appointments, and read informative blog articles. The application also includes a comprehensive Django Admin dashboard for managing products, categories, orders, appointments, testimonials, FAQs, newsletters, and blog content.
-
----
-
-=======
 <div align="center">
 
 # 👓 BOS Optics
@@ -47,7 +34,6 @@
 
 ---
 
->>>>>>> b7d7e852e8cf881fb5c0d90649c23795cf3acb36
 # ✨ Features
 
 ## 🏠 Home
@@ -119,17 +105,6 @@
 
 # 🛠️ Tech Stack
 
-<<<<<<< HEAD
-| Technology      | Description            |
-| --------------- | ---------------------- |
-| 🐍 Python 3.14+ | Programming Language   |
-| 🌿 Django 6.0   | Web Framework          |
-| ⚡ uv           | Python Package Manager |
-| 🗄 SQLite       | Development Database   |
-| 🎨 HTML5        | Markup                 |
-| 🎨 CSS3         | Styling                |
-| ⚡ JavaScript   | Frontend Interactivity |
-=======
 | Technology | Description |
 |------------|-------------|
 | 🐍 Python 3.14+ | Programming Language |
@@ -139,7 +114,6 @@
 | 🎨 HTML5 | Markup |
 | 🎨 CSS3 | Styling |
 | ⚡ JavaScript | Frontend Interactivity |
->>>>>>> b7d7e852e8cf881fb5c0d90649c23795cf3acb36
 
 ---
 
@@ -232,30 +206,6 @@ Open your browser:
 ```text
 http://127.0.0.1:8000/
 ```
-<<<<<<< HEAD
-
----
-
-# 🌐 Application Routes
-
-| Page                  | URL                     |
-| --------------------- | ----------------------- |
-| 🏠 Home               | `/home/`              |
-| 🛍️ Shop             | `/products/`          |
-| 🛒 Cart               | `/products/cart/`     |
-| 💳 Checkout           | `/products/checkout/` |
-| 📝 Blog               | `/blog/`              |
-| 👁️ Book Appointment | `/services/book/`     |
-| 🔐 Login              | `/home/login/`        |
-| 📝 Register           | `/home/register/`     |
-| 👤 Profile            | `/home/profile/`      |
-| ⚙️ Admin            | `/admin/`             |
-
----
-
-# 🛣️ Future Improvements
-
-=======
 
 ---
 
@@ -279,7 +229,6 @@ http://127.0.0.1:8000/
 
 # 🛣️ Future Improvements
 
->>>>>>> b7d7e852e8cf881fb5c0d90649c23795cf3acb36
 - 💳 Online Payment Integration
 - ❤️ Wishlist
 - ⭐ Product Ratings & Reviews
@@ -324,12 +273,9 @@ Software Engineer
 ---
 
 <div align="center">
-<<<<<<< HEAD
-=======
 
 ### ⭐ If you found this project helpful, consider giving it a star!
 
 Built with ❤️ using **Python**, **Django**, and **uv**.
 
 </div>
->>>>>>> b7d7e852e8cf881fb5c0d90649c23795cf3acb36
