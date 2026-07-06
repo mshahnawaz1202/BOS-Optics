@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: bos-optics
+
+    env: python
+
+    buildCommand: "./build.sh"
+
+    startCommand: "gunicorn bosoptics.wsgi:application"
