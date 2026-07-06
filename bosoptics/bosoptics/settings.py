@@ -23,16 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-n^#28kkhov#pini*mr(*y%y5(c(4#pzx&rcz_+s5b@x^#*vcka'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 import os
 
-ALLOWED_HOSTS = os.getenv(
-    "ALLOWED_HOSTS",
-    "127.0.0.1,localhost"
-).split(",")
-
+# ALLOWED_HOSTS = os.getenv(
+#     "ALLOWED_HOSTS",
+#     "127.0.0.1,localhost"
+# ).split(",")
+ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
